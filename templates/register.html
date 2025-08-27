@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClipVibe | Join Now</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(145deg, #e0f2fe, #ede9fe);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #1a1a1a;
+        }
+
+        .register-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            animation: slideIn 0.7s ease-out;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #0c4a6e;
+            margin-bottom: 1.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        input, select {
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid #cbd5e1;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus, select:focus {
+            border-color: #14b8a6;
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
+            outline: none;
+        }
+
+        select {
+            appearance: none;
+            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%230c4a6e'><polygon points='0,0 10,0 5,10'/></svg>") no-repeat right 0.8rem center;
+            background-size: 10px;
+        }
+
+        button {
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #14b8a6, #8b5cf6);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #0d9488, #6d28d9);
+        }
+
+        p {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: #0c4a6e;
+        }
+
+        p a {
+            color: #8b5cf6;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        p a:hover {
+            color: #6d28d9;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 480px) {
+            .register-container {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Join ClipVibe</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Choose a Username" required>
+            <input type="password" name="password" placeholder="Create a Password" required>
+            <select name="role" required>
+                <option value="" disabled selected>Choose Your Role</option>
+                <option value="viewer">Viewer</option>
+                <option value="creator">Creator</option>
+            </select>
+            <button type="submit">Sign Up</button>
+        </form>
+        <p>Already a member? <a href="{{ url_for('login') }}">Sign In</a>.</p>
+    </div>
+</body>
+</html>

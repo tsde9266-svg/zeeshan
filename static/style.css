@@ -1,0 +1,444 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f6fa;
+    color: #333;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Header */
+header.navbar, header {
+    background: #1e1e2f;
+    color: #fff;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header .logo, header h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 0.5rem;
+    padding: 0.5rem 0.75rem;
+    transition: background 0.3s ease;
+}
+
+nav a:hover,
+nav .btn:hover {
+    background: #333956;
+    border-radius: 5px;
+}
+
+nav .btn {
+    background: #ff4b5c;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.user {
+    font-weight: bold;
+    margin-left: 1rem;
+}
+
+/* Flash Messages */
+.flash-messages {
+    list-style: none;
+    margin: 1rem auto;
+    padding: 1rem;
+    max-width: 500px;
+    border-left: 5px solid #ff4b5c;
+    background: #ffeef0;
+    color: #a30014;
+}
+
+/* Main Content */
+main.content {
+    padding: 2rem;
+}
+
+/* Auth Forms */
+.auth-form, .form-box {
+    background: #fff;
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form input,
+.form-box input,
+.form-box select {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.auth-form button,
+.form-box button {
+    padding: 0.75rem;
+    background: #4e73df;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.auth-form button:hover,
+.form-box button:hover {
+    background: #2e59d9;
+}
+
+form p {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+form a {
+    color: #4e73df;
+    text-decoration: none;
+}
+
+form a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    header.navbar, header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav {
+        margin-top: 1rem;
+    }
+}
+
+
+/* Upload Page Styles */
+.upload-form {
+    background: #fff;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.upload-form h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.upload-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-form label {
+    margin-top: 1rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.upload-form input,
+.upload-form select {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.upload-form input[type="file"] {
+    padding: 0.4rem;
+}
+
+.upload-form button {
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+    background: #4e73df;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.upload-form button:hover {
+    background: #2e59d9;
+}
+
+/* Uploaded Videos Section */
+.uploaded-videos {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.uploaded-videos h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.video-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.video-card video {
+    border-radius: 8px;
+    max-width: 100%;
+}
+
+.video-info {
+    margin-top: 0.75rem;
+    text-align: center;
+}
+
+.video-info h3 {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+    color: #222;
+}
+
+.video-info p {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+
+/* Shorts Page Styles */
+.shorts-feed {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.shorts-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.shorts-card:hover {
+    transform: translateY(-4px);
+}
+
+.shorts-video {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #eee;
+    max-height: 480px;
+    object-fit: cover;
+    background: #000;
+}
+
+.shorts-info {
+    padding: 1rem;
+}
+
+.shorts-info h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    color: #222;
+}
+
+.shorts-info .meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 0.75rem;
+}
+
+.shorts-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.like-btn {
+    font-size: 1.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.like-btn[data-liked="true"] {
+    color: #e0245e;
+}
+
+.like-btn:hover {
+    transform: scale(1.1);
+}
+
+.like-count {
+    margin-left: 0.5rem;
+    font-weight: bold;
+    color: #444;
+}
+
+.comment-link {
+    color: #4e73df;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s ease;
+}
+
+.comment-link:hover {
+    text-decoration: underline;
+}
+/* Watch Page Styles */
+.video-player {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.video-player video {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #000;
+}
+
+.video-player p {
+    margin: 0.5rem 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Comments Section */
+.comments-section {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.comments-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.comment {
+    padding: 0.75rem 1rem;
+    background: #f9f9f9;
+    border-left: 4px solid #4e73df;
+    margin-bottom: 1rem;
+    border-radius: 6px;
+}
+
+.comment strong {
+    font-weight: bold;
+    color: #222;
+}
+
+.comment p {
+    margin: 0.25rem 0;
+    color: #444;
+}
+
+.comment small {
+    font-size: 0.75rem;
+    color: #777;
+}
+
+/* Comment Form */
+.comments-section form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.comments-section textarea {
+    resize: vertical;
+    min-height: 100px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.comments-section select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.comments-section button {
+    padding: 0.75rem;
+    background: #4e73df;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.comments-section button:hover {
+    background: #2e59d9;
+}
+
+.comments-section a {
+    color: #4e73df;
+    text-decoration: none;
+}
+
+.comments-section a:hover {
+    text-decoration: underline;
+}

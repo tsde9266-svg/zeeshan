@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Home | tikshare{% endblock %}
+
+{% block content %}
+<h2>Welcome to tikshare</h2>
+<p>Your space to explore short-form videos by creators.</p>
+
+<div class="video-grid">
+    {% for video in videos %}
+        <div class="video-card">
+            <video width="100%" controls>
+                <source src="{{ video['url'] }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <h3>{{ video['title'] }}</h3>
+            <p>{{ video['publisher'] }}</p>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

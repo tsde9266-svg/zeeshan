@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ClipVibe | Clips</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+
+        h1 {
+            color: #0c4a6e;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .clips-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .clip-item {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clip-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .clip-video {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .clip-meta {
+            padding: 1rem;
+        }
+
+        .clip-meta h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0c4a6e;
+        }
+
+        .clip-meta p {
+            margin: 0.4rem 0 0;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+
+        .clip-actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 0.8rem 1rem;
+            background: #f1f5f9;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .clip-actions button,
+        .clip-actions a {
+            background: none;
+            border: none;
+            color: #8b5cf6;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.3s, transform 0.2s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .clip-actions button:hover,
+        .clip-actions a:hover {
+            color: #6d28d9;
+            transform: scale(1.05);
+        }
+
+        .like-count,
+        .comment-link {
+            font-size: 0.9rem;
+        }
+
+        .comment-link {
+            color: #14b8a6;
+        }
+
+        @media (max-width: 768px) {
+            .clips-container {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.6rem;
+            }
+            .clips-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>✨ ClipVibe Feed</h1>
+
+    <div class="clips-container">
+        {% for video in videos %}
+            <div class="clip-item">
+                <a href="{{ url_for('watch', video_id=video['id']) }}">
+                    <video class="clip-video" autoplay loop muted playsinline>
+                        <source src="{{ video['url'] }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </a>
+                <div class="clip-meta">
+                    <h3>{{ video['title'] }}</h3>
+                    <p>{{ video['publisher'] }} • {{ video['genre'] or "N/A" }} • Rated: {{ video['age_rating'] or "N/A" }}</p>
+                </div>
+                <div class="clip-actions">
+                    <form method="POST" action="{{ url_for('like') }}" class="like-form" data-video-id="{{ video['id'] }}">
+                        <button type="button" class="like-btn" data-liked="false">Like <span class="like-count">{{ video['like_count'] }}</span></button>
+                    </form>
+                    <a href="{{ url_for('watch', video_id=video['id']) }}" class="comment-link">Comments {{ video['comment_count'] }}</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        document.querySelectorAll('.like-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const form = btn.closest('.like-form');
+                const videoId = form.dataset.videoId;
+                const liked = btn.dataset.liked === 'true';
+                const res = await fetch("{{ url_for('like') }}", {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `video_id=${videoId}&liked=${!liked}`
+                });
+                const data = await res.json();
+                if (data.success) {
+                    btn.querySelector('.like-count').textContent = data.like_count;
+                    btn.dataset.liked = (!liked).toString();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

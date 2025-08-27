@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}ClipVibe{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8fafc;
+            color: #1a1a1a;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #14b8a6, #8b5cf6);
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-transform: lowercase;
+            letter-spacing: -0.5px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .header .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .header nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .header nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .header nav a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+
+        .header .user {
+            background: #fff;
+            color: #14b8a6;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn {
+            background: #fff;
+            color: #8b5cf6;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #f1f5f9;
+            color: #6d28d9;
+            transform: translateY(-2px);
+        }
+
+        .notifications {
+            list-style: none;
+            padding: 0.5rem 1rem;
+            margin: 0;
+            background: #e0f2fe;
+            border-bottom: 1px solid #bae6fd;
+            text-align: center;
+        }
+
+        .notifications li {
+            margin: 0.3rem 0;
+            color: #0c4a6e;
+            font-size: 0.95rem;
+        }
+
+        .main-content {
+            padding: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            min-height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .header nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">clipvibe</div>
+        <nav>
+            {% if 'user' in session %}
+                <a href="{{ url_for('shorts') }}">Clips</a>
+                {% if session['user']['role'] == 'creator' %}
+                    <a href="{{ url_for('dashboard') }}">Creator Hub</a>
+                {% endif %}
+                <span class="user">{{ session['user']['username'] }}</span>
+                <a href="{{ url_for('logout') }}" class="action-btn">Sign Out</a>
+            {% else %}
+                <a href="{{ url_for('login') }}">Sign In</a>
+                <a href="{{ url_for('register') }}" class="action-btn">Join Now</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="notifications">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
