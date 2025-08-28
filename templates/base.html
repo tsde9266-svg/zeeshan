@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}ClipVibe{% endblock %}</title>
+    <title>{% block title %}tikshortsapp{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     <style>
@@ -124,7 +124,7 @@
 </head>
 <body>
     <header class="header">
-        <div class="logo">clipvibe</div>
+        <div class="logo">tikshortsapp</div>
         <nav>
             {% if 'user' in session %}
                 <a href="{{ url_for('shorts') }}">Clips</a>
