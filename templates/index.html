@@ -1,20 +1,31 @@
 {% extends "base.html" %}
-{% block title %}Home | tikshare{% endblock %}
-
+{% block title %}Home | Zeshare{% endblock %}
 {% block content %}
-<h2>Welcome to tikshare</h2>
-<p>Your space to explore short-form videos by creators.</p>
-
-<div class="video-grid">
-    {% for video in videos %}
-        <div class="video-card">
-            <video width="100%" controls>
-                <source src="{{ video['url'] }}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-            <h3>{{ video['title'] }}</h3>
-            <p>{{ video['publisher'] }}</p>
+{% if 'user' in session %}
+    <h2>Welcome to Zeshare</h2>
+    <p>Explore short-form videos by creators.</p>
+    <div class="video-grid">
+        {% for video in videos %}
+            <div class="video-card">
+                <a href="{{ url_for('watch', video_id=video['id']) }}">
+                    <video width="100%" muted playsinline>
+                        <source src="{{ video['url'] }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </a>
+                <h3>{{ video['title'] }}</h3>
+                <p>{{ video['publisher'] }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <section class="hero">
+        <h1>Join Zeshare Today</h1>
+        <p>Discover and share short-form videos with a vibrant community of creators.</p>
+        <div class="hero-cta">
+            <a href="{{ url_for('register') }}" class="btn btn-primary">Get Started</a>
+            <a href="{{ url_for('login') }}" class="btn btn-secondary">Login</a>
         </div>
-    {% endfor %}
-</div>
+    </section>
+{% endif %}
 {% endblock %}

@@ -1,231 +1,55 @@
 {% extends "base.html" %}
-{% block title %}Watch | tikshortsapp{% endblock %}
-
+{% block title %}Watch | Zeshare{% endblock %}
 {% block content %}
-<style>
-    body {
-        background: #f8fafc;
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        color: #1a1a1a;
-    }
-
-    h2 {
-        font-size: 1.9rem;
-        font-weight: 700;
-        margin-bottom: 1.2rem;
-        color: #0c4a6e;
-        text-align: center;
-    }
-
-    .video-container {
-        max-width: 1100px;
-        margin: 0 auto 2rem auto;
-        background: #fff;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .video-container:hover {
-        transform: translateY(-4px);
-    }
-
-    .video-container video {
-        width: 100%;
-        display: block;
-        border-radius: 12px 12px 0 0;
-    }
-
-    .video-details {
-        max-width: 1100px;
-        margin: 1rem auto 2rem auto;
-        padding: 1.5rem;
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .video-details p {
-        margin: 0.5rem 0;
-        font-size: 0.95rem;
-        color: #475569;
-    }
-
-    .video-details p strong {
-        color: #0c4a6e;
-    }
-
-    .comments-section {
-        max-width: 1100px;
-        margin: 0 auto;
-        background: #fff;
-        padding: 1.5rem;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .comment {
-        background: #f1f5f9;
-        padding: 1rem;
-        border-radius: 10px;
-        margin-bottom: 1rem;
-        transition: background 0.3s;
-    }
-
-    .comment:hover {
-        background: #e2e8f0;
-    }
-
-    .comment strong {
-        color: #0c4a6e;
-        font-weight: 600;
-    }
-
-    .comment p {
-        margin: 0.5rem 0;
-        font-size: 0.95rem;
-        color: #1a1a1a;
-    }
-
-    .comment small {
-        display: block;
-        font-size: 0.8rem;
-        color: #64748b;
-        margin-top: 0.4rem;
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 1.2rem;
-    }
-
-    textarea, select, input, button {
-        font-size: 1rem;
-        border-radius: 10px;
-        border: 1px solid #cbd5e1;
-        padding: 0.8rem;
-        transition: border-color 0.3s, box-shadow 0.3s;
-    }
-
-    textarea {
-        resize: vertical;
-        min-height: 100px;
-        background: #f8fafc;
-        color: #1a1a1a;
-    }
-
-    select, input {
-        background: #f8fafc;
-        color: #1a1a1a;
-    }
-
-    textarea:focus, select:focus, input:focus {
-        border-color: #14b8a6;
-        box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
-        outline: none;
-    }
-
-    select {
-        appearance: none;
-        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%230c4a6e'><polygon points='0,0 10,0 5,10'/></svg>") no-repeat right 0.8rem center;
-        background-size: 10px;
-    }
-
-    button {
-        background: linear-gradient(135deg, #14b8a6, #8b5cf6);
-        color: #fff;
-        font-weight: 600;
-        border: none;
-        cursor: pointer;
-        transition: transform 0.2s, background 0.3s;
-    }
-
-    button:hover {
-        transform: translateY(-2px);
-        background: linear-gradient(135deg, #0d9488, #6d28d9);
-    }
-
-    a {
-        color: #8b5cf6;
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.3s;
-    }
-
-    a:hover {
-        color: #6d28d9;
-        text-decoration: underline;
-    }
-
-    @media (max-width: 768px) {
-        .video-container, .video-details, .comments-section {
-            max-width: 90%;
-        }
-    }
-
-    @media (max-width: 480px) {
-        h2 {
-            font-size: 1.6rem;
-        }
-        .video-container, .video-details, .comments-section {
-            padding: 1rem;
-        }
-    }
-</style>
-
-<h2>{{ video.title }}</h2>
-
-<div class="video-container">
-    <video controls>
-        <source src="{{ video.url }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-</div>
-
-<div class="video-details">
-    <p><strong>Publisher:</strong> {{ video.publisher }}</p>
-    <p><strong>Genre:</strong> {{ video.genre or "N/A" }}</p>
-    <p><strong>Age Rating:</strong> {{ video.age_rating or "N/A" }}</p>
-</div>
-
-<section class="comments-section">
-    <h2>Comments</h2>
-    <div id="comments">
-        {% for comment in comments %}
-            <div class="comment">
-                <strong>{{ comment.username }}</strong> ({{ comment.rating }}/5):
-                <p>{{ comment.comment }}</p>
-                <small>{{ comment.created_at }}</small>
-            </div>
-        {% else %}
-            <p>No comments yet. Be the first!</p>
-        {% endfor %}
+<div class="watch-container">
+    <div class="video-section">
+        <h2>{{ video.title }}</h2>
+        <div class="video-container">
+            <video controls>
+                <source src="{{ video.url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <div class="video-details">
+            <p><strong>Publisher:</strong> {{ video.publisher }}</p>
+            <p><strong>Genre:</strong> {{ video.genre }}</p>
+            <p><strong>Age Rating:</strong> {{ video.age_rating }}</p>
+        </div>
     </div>
-
-    {% if session.get('user') %}
-        <form onsubmit="postComment(event)" method="POST">
-            <input type="hidden" name="video_id" value="{{ video.id }}">
-            <label>Your Comment:</label>
-            <textarea name="comment" placeholder="Share your thoughts..." required></textarea>
-            <label>Rating:</label>
-            <select name="rating" required>
-                <option value="" disabled selected>-- Select Rating --</option>
-                <option value="1">1 / 5</option>
-                <option value="2">2 / 5</option>
-                <option value="3">3 / 5</option>
-                <option value="4">4 / 5</option>
-                <option value="5">5 / 5</option>
-            </select>
-            <button type="submit">Post Comment</button>
-        </form>
-    {% else %}
-        <p><a href="{{ url_for('login') }}">Sign in to comment</a></p>
-    {% endif %}
-</section>
-
+    <section class="comments-section">
+        <h3>Comments</h3>
+        <div id="comments">
+            {% for comment in comments %}
+                <div class="comment">
+                    <strong>{{ comment.username }}</strong> ({{ comment.rating }}/5):
+                    <p>{{ comment.comment }}</p>
+                    <small>{{ comment.created_at }}</small>
+                </div>
+            {% else %}
+                <p>No comments yet. Be the first!</p>
+            {% endfor %}
+        </div>
+        {% if session.get('user') %}
+            <form onsubmit="postComment(event)" method="POST">
+                <input type="hidden" name="video_id" value="{{ video.id }}">
+                <label>Your Comment:</label>
+                <textarea name="comment" required></textarea>
+                <label>Rating:</label>
+                <select name="rating" required>
+                    <option value="">-- Select --</option>
+                    <option value="1">1 / 5</option>
+                    <option value="2">2 / 5</option>
+                    <option value="3">3 / 5</option>
+                    <option value="4">4 / 5</option>
+                    <option value="5">5 / 5</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Post Comment</button>
+            </form>
+        {% else %}
+            <p><a href="{{ url_for('login') }}">Login to comment</a></p>
+        {% endif %}
+    </section>
+</div>
 <script>
 async function postComment(event) {
     event.preventDefault();
@@ -235,7 +59,6 @@ async function postComment(event) {
         method: 'POST',
         body: formData
     });
-
     const data = await response.json();
     if (data.success) {
         const commentSection = document.getElementById("comments");

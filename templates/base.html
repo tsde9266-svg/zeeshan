@@ -2,147 +2,117 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}tikshortsapp{% endblock %}</title>
+    <title>{% block title %}Zeshare{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
     <style>
         body {
             margin: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f8fafc;
-            color: #1a1a1a;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f4f4;
+            color: #333;
         }
 
-        .header {
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background: linear-gradient(135deg, #14b8a6, #8b5cf6);
+            padding: 0.8rem 2rem;
+            background: #111;
             color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
-        .header .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            text-transform: lowercase;
-            letter-spacing: -0.5px;
-            cursor: pointer;
-            transition: transform 0.3s ease;
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e50914; /* Netflix red vibe */
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .header .logo:hover {
-            transform: scale(1.05);
-        }
-
-        .header nav {
+        .navbar nav {
             display: flex;
-            gap: 1.5rem;
+            gap: 1.2rem;
             align-items: center;
         }
 
-        .header nav a {
-            color: #fff;
+        .navbar nav a {
+            color: #ddd;
             text-decoration: none;
             font-weight: 500;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: background 0.3s, color 0.3s;
+            transition: color 0.2s;
         }
 
-        .header nav a:hover {
-            background: rgba(255, 255, 255, 0.15);
+        .navbar nav a:hover {
             color: #fff;
         }
 
-        .header .user {
-            background: #fff;
-            color: #14b8a6;
-            padding: 0.4rem 1rem;
+        .navbar .user {
+            background: #e50914;
+            color: #fff;
+            padding: 0.3rem 0.7rem;
             border-radius: 20px;
             font-size: 0.9rem;
-            font-weight: 600;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
         }
 
-        .action-btn {
-            background: #fff;
-            color: #8b5cf6;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
+        .btn {
+            background: #e50914;
+            color: #fff;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
             text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s, color 0.3s, transform 0.2s;
+            transition: background 0.2s;
         }
 
-        .action-btn:hover {
-            background: #f1f5f9;
-            color: #6d28d9;
-            transform: translateY(-2px);
+        .btn:hover {
+            background: #b20710;
         }
 
-        .notifications {
+        .flash-messages {
             list-style: none;
             padding: 0.5rem 1rem;
             margin: 0;
-            background: #e0f2fe;
-            border-bottom: 1px solid #bae6fd;
-            text-align: center;
+            background: #fffae6;
+            border-bottom: 1px solid #ddd;
         }
 
-        .notifications li {
-            margin: 0.3rem 0;
-            color: #0c4a6e;
-            font-size: 0.95rem;
+        .flash-messages li {
+            margin: 0.2rem 0;
+            color: #333;
         }
 
-        .main-content {
+        .content {
             padding: 2rem;
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
-            min-height: calc(100vh - 60px);
-            display: flex;
-            flex-direction: column;
-        }
-
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .header nav {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">tikshortsapp</div>
+    <header class="navbar">
+        <div class="logo">Zeshare</div>
         <nav>
             {% if 'user' in session %}
-                <a href="{{ url_for('shorts') }}">Clips</a>
+                <a href="{{ url_for('shorts') }}">Shorts</a>
                 {% if session['user']['role'] == 'creator' %}
-                    <a href="{{ url_for('dashboard') }}">Creator Hub</a>
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
                 {% endif %}
                 <span class="user">{{ session['user']['username'] }}</span>
-                <a href="{{ url_for('logout') }}" class="action-btn">Sign Out</a>
+                <a href="{{ url_for('logout') }}" class="btn">Logout</a>
             {% else %}
-                <a href="{{ url_for('login') }}">Sign In</a>
-                <a href="{{ url_for('register') }}" class="action-btn">Join Now</a>
+                <a href="{{ url_for('login') }}">Login</a>
+                <a href="{{ url_for('register') }}" class="btn">Sign Up</a>
             {% endif %}
         </nav>
     </header>
 
     {% with messages = get_flashed_messages() %}
       {% if messages %}
-        <ul class="notifications">
+        <ul class="flash-messages">
           {% for message in messages %}
             <li>{{ message }}</li>
           {% endfor %}
@@ -150,7 +120,7 @@
       {% endif %}
     {% endwith %}
 
-    <main class="main-content">
+    <main class="content">
         {% block content %}{% endblock %}
     </main>
 </body>

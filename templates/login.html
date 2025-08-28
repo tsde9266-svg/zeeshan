@@ -2,166 +2,145 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>tikshortsapp | Sign In</title>
+    <title>Zeshare | Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='styles/style.css') }}" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(135deg, #14b8a6, #8b5cf6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #1a1a1a;
-        }
+      /* General reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .container {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-            padding: 2rem;
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-            animation: slideIn 0.6s ease-out;
-        }
+.auth-body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-        h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #0c4a6e;
-            margin-bottom: 1.5rem;
-        }
+/* Container for the form */
+.auth-container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
 
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
+/* Heading */
+.auth-container h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
 
-        .nav-links a {
-            color: #fff;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: background 0.3s, color 0.3s;
-        }
+/* Form inputs and select */
+.auth-container input[type="text"],
+.auth-container input[type="password"],
+.auth-container select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
 
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-        }
+.auth-container input:focus,
+.auth-container select:focus {
+    outline: none;
+    border-color: #E50914;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
 
-        .notifications {
-            list-style: none;
-            padding: 0.5rem;
-            margin: 0 0 1.5rem 0;
-            background: #fef3c7;
-            color: #92400e;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
+/* Placeholder styling */
+.auth-container input::placeholder {
+    color: #999;
+}
 
-        .notifications li {
-            margin: 0.5rem 0;
-        }
+/* Button */
+.btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #E50914;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
+.btn-primary:hover {
+    background-color: #E50914;
+}
 
-        label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #0c4a6e;
-            text-align: left;
-        }
+/* Link styling */
+.auth-container p {
+    margin-top: 1rem;
+    color: #555;
+    font-size: 0.9rem;
+}
 
-        input {
-            padding: 0.8rem;
-            font-size: 1rem;
-            border-radius: 10px;
-            border: 1px solid #cbd5e1;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
+.auth-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
 
-        input:focus {
-            border-color: #14b8a6;
-            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
-            outline: none;
-        }
+.auth-container a:hover {
+    text-decoration: underline;
+}
 
-        button {
-            padding: 0.8rem;
-            background: linear-gradient(135deg, #14b8a6, #8b5cf6);
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-        }
+/* Responsive design */
+@media (max-width: 480px) {
+    .auth-container {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
 
-        button:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, #0d9488, #6d28d9);
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 1.5rem;
-                max-width: 90%;
-            }
-            h2 {
-                font-size: 1.6rem;
-            }
-            .nav-links {
-                gap: 1rem;
-            }
-            .nav-links a {
-                font-size: 0.85rem;
-                padding: 0.4rem 0.8rem;
-            }
-        }
+    .auth-container h2 {
+        font-size: 1.5rem;
+    }
+}
     </style>
 </head>
-<body>
-    <div class="container">
-        <h2>Welcome Back</h2>
+<body class="auth-body">
+    <div class="auth-container">
+        <h1>Welcome Back</h1>
         <div class="nav-links">
             <a href="{{ url_for('index') }}">Home</a>
             <a href="{{ url_for('register') }}">Register</a>
         </div>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class="notifications">
-                    {% for message in messages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-        <form method="POST" action="{{ url_for('login') }}">
-            <label>Username</label>
-            <input type="text" name="username" placeholder="Enter your username" required>
-            <label>Password</label>
-            <input type="password" name="password" placeholder="Enter your password" required>
-            <button type="submit">Log In</button>
+        <form method="POST">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="flash-messages">
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            <div>
+                <label>Username</label>
+                <input type="text" name="username" required>
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Log In</button>
         </form>
-        <p>New to tikshortsapp? <a href="{{ url_for('register') }}">Create an account</a>.</p>
     </div>
 </body>
 </html>
- 

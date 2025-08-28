@@ -978,117 +978,47 @@ def add_demo_videos():
     count = db.execute('SELECT COUNT(*) as count FROM videos').fetchone()['count']
     if count == 0:
         demo_videos = [
-    {
-        'title': 'Wonders of the Deep Ocean',
-        'publisher': 'Blue Horizon Media',
-        'producer': 'Marina Clarke',
-        'genre': 'Nature',
-        'age_rating': 'G',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-        'id': 1,
-        'like_count': 120,
-        'comment_count': 45
-    },
-    {
-        'title': 'Cooking Made Simple: Quick Pasta',
-        'publisher': 'KitchenCraft',
-        'producer': 'Liam Bennett',
-        'genre': 'Cooking',
-        'age_rating': 'G',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-        'id': 2,
-        'like_count': 85,
-        'comment_count': 30
-    },
-    {
-        'title': 'Street Dance Showcase',
-        'publisher': 'Urban Beat Studios',
-        'producer': 'Sofia Delgado',
-        'genre': 'Dance',
-        'age_rating': 'PG',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4',
-        'id': 3,
-        'like_count': 200,
-        'comment_count': 60
-    },
-    {
-        'title': 'Adventures in Virtual Reality',
-        'publisher': 'FutureVision',
-        'producer': 'Daniel Iqbal',
-        'genre': 'Technology',
-        'age_rating': 'PG',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
-        'id': 4,
-        'like_count': 150,
-        'comment_count': 25
-    },
-    {
-        'title': 'Beginner Yoga Flow',
-        'publisher': 'Mind & Motion',
-        'producer': 'Anya Patel',
-        'genre': 'Health & Fitness',
-        'age_rating': 'G',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
-        'id': 5,
-        'like_count': 90,
-        'comment_count': 20
-    },
-    {
-        'title': 'Python Coding: Build a Simple Game',
-        'publisher': 'TechBit',
-        'producer': 'Emma Nguyen',
-        'genre': 'Education',
-        'age_rating': 'G',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
-        'id': 6,
-        'like_count': 180,
-        'comment_count': 50
-    },
-    {
-        'title': 'Ethics of Artificial Intelligence',
-        'publisher': 'AI Insights',
-        'producer': 'Dr. Sarah Lin',
-        'genre': 'AI/Technology',
-        'age_rating': 'PG',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4',
-        'id': 7,
-        'like_count': 130,
-        'comment_count': 35
-    },
-    {
-        'title': 'Introduction to Machine Learning',
-        'publisher': 'DataScience Hub',
-        'producer': 'Michael Torres',
-        'genre': 'AI/Technology',
-        'age_rating': 'PG',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
-        'id': 8,
-        'like_count': 160,
-        'comment_count': 40
-    },
-    {
-        'title': 'Exploring the Cosmos: Black Holes',
-        'publisher': 'StarQuest Academy',
-        'producer': 'Dr. Neil Patel',
-        'genre': 'Education',
-        'age_rating': 'G',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4',
-        'id': 9,
-        'like_count': 220,
-        'comment_count': 70
-    },
-    {
-        'title': 'Quantum Computing Explained',
-        'publisher': 'QuantumLeap Tech',
-        'producer': 'Dr. Clara Evans',
-        'genre': 'AI/Technology',
-        'age_rating': '12',
-        'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
-        'id': 10,
-        'like_count': 140,
-        'comment_count': 30
-    }
-]
+            {
+                'title': 'Wonders of the Deep Ocean',
+                'publisher': 'Blue Horizon Media',
+                'producer': 'Marina Clarke',
+                'genre': 'Nature',
+                'age_rating': 'G',
+                'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'
+            },
+            {
+                'title': 'Cooking Made Simple: Quick Pasta',
+                'publisher': 'KitchenCraft',
+                'producer': 'Liam Bennett',
+                'genre': 'Cooking',
+                'age_rating': 'G',
+                'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4'
+            },
+            {
+                'title': 'Street Dance Showcase',
+                'publisher': 'Urban Beat Studios',
+                'producer': 'Sofia Delgado',
+                'genre': 'Dance',
+                'age_rating': 'PG',
+                'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4'
+            },
+            {
+                'title': 'Adventures in Virtual Reality',
+                'publisher': 'FutureVision',
+                'producer': 'Daniel Iqbal',
+                'genre': 'Technology',
+                'age_rating': 'PG',
+                'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4'
+            },
+            {
+                'title': 'Beginner Yoga Flow',
+                'publisher': 'Mind & Motion',
+                'producer': 'Anya Patel',
+                'genre': 'Health & Fitness',
+                'age_rating': 'G',
+                'url': 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4'
+            }
+        ]
 
         try:
             db.execute(

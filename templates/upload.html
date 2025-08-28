@@ -1,245 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>tikshortsapp | Creator Hub</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #f8fafc;
-            color: #1a1a1a;
-            padding: 2rem;
-        }
-
-        h1, h2 {
-            margin-bottom: 1.2rem;
-            font-weight: 700;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            color: #0c4a6e;
-            text-align: center;
-        }
-
-        h2 {
-            font-size: 1.4rem;
-            color: #0c4a6e;
-        }
-
-        .notifications {
-            list-style: none;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            border-radius: 8px;
-            background: #fef3c7;
-            color: #92400e;
-            text-align: center;
-            font-size: 0.9rem;
-        }
-
-        .upload-section {
-            background: #fff;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-            max-width: 600px;
-            animation: slideIn 0.6s ease-out;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #0c4a6e;
-        }
-
-        input, select {
-            padding: 0.8rem;
-            font-size: 1rem;
-            border-radius: 10px;
-            border: 1px solid #cbd5e1;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        input:focus, select:focus {
-            border-color: #14b8a6;
-            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2);
-            outline: none;
-        }
-
-        select {
-            appearance: none;
-            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%230c4a6e'><polygon points='0,0 10,0 5,10'/></svg>") no-repeat right 0.8rem center;
-            background-size: 10px;
-        }
-
-        button {
-            padding: 0.8rem;
-            background: linear-gradient(135deg, #14b8a6, #8b5cf6);
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.2s, background 0.3s;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            background: linear-gradient(135deg, #0d9488, #6d28d9);
-        }
-
-        .videos-section {
-            max-width: 1100px;
-        }
-
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
-        }
-
-        .video-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 1rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .video-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        video {
-            width: 100%;
-            border-radius: 8px;
-            margin-bottom: 0.8rem;
-        }
-
-        .video-info {
-            text-align: left;
-            width: 100%;
-        }
-
-        .video-info h3 {
-            margin: 0 0 0.4rem;
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: #0c4a6e;
-        }
-
-        .video-info p {
-            margin: 0.2rem 0;
-            font-size: 0.85rem;
-            color: #475569;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @media (max-width: 768px) {
-            .video-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
-        }
-
-        @media (max-width: 480px) {
-            .upload-section {
-                padding: 1.2rem;
-            }
-            h1 {
-                font-size: 1.6rem;
-            }
-            h2 {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <h1>Creator Hub</h1>
-
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="notifications">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-
-    <section class="upload-section">
-        <h2>Upload New Clip</h2>
-        <form method="POST" action="{{ url_for('upload_video') }}" enctype="multipart/form-data">
-            <label>Title:</label>
-            <input type="text" name="title" placeholder="Enter video title" required>
-
-            <label>Publisher:</label>
-            <input type="text" name="publisher" placeholder="Your name or brand" required>
-
-            <label>Producer:</label>
-            <input type="text" name="producer" placeholder="Producer name (optional)">
-
-            <label>Genre:</label>
-            <input type="text" name="genre" placeholder="e.g., Comedy, Music">
-
-            <label>Age Rating:</label>
-            <select name="age_rating" required>
-                <option value="" disabled selected>-- Select Rating --</option>
-                <option value="G">G</option>
-                <option value="PG">PG</option>
-                <option value="12">12</option>
-                <option value="15">15</option>
-                <option value="18">18</option>
-            </select>
-
-            <label>Upload Clip:</label>
-            <input type="file" name="file" accept="video/*">
-
-            <button type="submit">Upload Clip</button>
-        </form>
-    </section>
-
-    <section class="videos-section">
-        <h2>Your Clips</h2>
-        {% if videos %}
-            <div class="video-grid">
-                {% for video in videos %}
-                    <div class="video-card">
-                        <video controls>
-                            <source src="{{ video.url }}" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="video-info">
-                            <h3>{{ video.title }}</h3>
-                            <p><strong>Genre:</strong> {{ video.genre or "N/A" }}</p>
-                            <p><strong>Rating:</strong> {{ video.age_rating or "N/A" }}</p>
-                        </div>
+{% extends "base.html" %}
+{% block title %}Creator Dashboard | Zeshare{% endblock %}
+{% block content %}
+<h1>Creator Dashboard</h1>
+<section class="upload-form">
+    <h2>Upload New Video</h2>
+    <form method="POST" action="{{ url_for('upload_video') }}" enctype="multipart/form-data">
+        <label>Title:</label>
+        <input type="text" name="title" required>
+        <label>Publisher:</label>
+        <input type="text" name="publisher" required>
+        <label>Producer:</label>
+        <input type="text" name="producer">
+        <label>Genre:</label>
+        <input type="text" name="genre">
+        <label>Age Rating:</label>
+        <select name="age_rating" required>
+            <option value="">-- Select --</option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="12">12</option>
+            <option value="15">15</option>
+            <option value="18">18</option>
+        </select>
+        <label>Upload File:</label>
+        <input type="file" name="file" accept="video/*">
+        <button type="submit" class="btn btn-primary">Upload</button>
+    </form>
+</section>
+<section class="uploaded-videos">
+    <h2>Your Uploaded Videos</h2>
+    {% if videos %}
+        <div class="video-grid">
+            {% for video in videos %}
+                <div class="video-card">
+                    <video controls>
+                        <source src="{{ video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-info">
+                        <h3>{{ video.title }}</h3>
+                        <p><strong>Genre:</strong> {{ video.genre }}</p>
+                        <p><strong>Rating:</strong> {{ video.age_rating }}</p>
                     </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <p>You haven't uploaded any clips yet.</p>
-        {% endif %}
-    </section>
-</body>
-</html>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>You haven't uploaded any videos yet.</p>
+    {% endif %}
+</section>
+{% endblock %}
